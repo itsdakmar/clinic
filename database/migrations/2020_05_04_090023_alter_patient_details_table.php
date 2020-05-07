@@ -14,8 +14,8 @@ class AlterPatientDetailsTable extends Migration
     public function up()
     {
         Schema::table('patient_details', function (Blueprint $table) {
-            $table->unsignedBigInteger('cityId');
-            $table->unsignedBigInteger('stateId');
+            $table->unsignedBigInteger('cityId')->after('address_2');
+            $table->unsignedBigInteger('stateId')->after('cityId');
             $table->foreign('stateId')->references('id')->on('states');
             $table->foreign('cityId')->references('id')->on('cities');
         });

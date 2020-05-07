@@ -14,7 +14,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         $admin = User::create([
-            'name' => 'Ammar Razaman',
+            'matricStaffId' => 'B031810044',
+            'firstName' => 'Ammar',
+            'lastName' => 'Razaman',
             'email' => 'amar@gmail.com',
             'password' => Hash::make('secret'),
         ]);
@@ -22,7 +24,9 @@ class UserSeeder extends Seeder
         $admin->assignRole('administrator');
 
         $doctor = User::create([
-            'name' => 'Athira Abd',
+            'matricStaffId' => 'B031710277',
+            'firstName' => 'Athira',
+            'lastName' => 'Abd',
             'email' => 'athira@gmail.com',
             'password' => Hash::make('secret'),
         ]);
@@ -30,7 +34,9 @@ class UserSeeder extends Seeder
         $doctor->assignRole('doctor');
 
         $nurse = User::create([
-            'name' => 'Sofia Melissa',
+            'matricStaffId' => '000001',
+            'firstName' => 'Sofia',
+            'lastName' => 'Melissa',
             'email' => 'sofia@gmail.com',
             'password' => Hash::make('secret'),
         ]);
@@ -38,7 +44,9 @@ class UserSeeder extends Seeder
         $nurse->assignRole('nurse');
 
         $patient = User::create([
-            'name' => 'Siti Aafiyah',
+            'matricStaffId' => '000002',
+            'firstName' => 'Siti',
+            'lastName' => 'Aafiyah',
             'email' => 'aafiyah@gmail.com',
             'password' => Hash::make('secret'),
         ]);

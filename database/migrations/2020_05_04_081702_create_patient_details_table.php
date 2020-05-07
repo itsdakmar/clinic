@@ -16,8 +16,6 @@ class CreatePatientDetailsTable extends Migration
         Schema::create('patient_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('userId');
-            $table->string('firstName');
-            $table->string('lastName');
             $table->string('sex');
             $table->string('race');
             $table->date('dob');

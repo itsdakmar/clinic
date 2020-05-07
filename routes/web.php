@@ -153,4 +153,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+Route::post('cities/get', 'CityController@getCities')->name('cities.get');
 Route::resource('patients','PatientController');

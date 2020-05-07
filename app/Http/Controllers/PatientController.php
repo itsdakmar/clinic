@@ -42,8 +42,13 @@ class PatientController extends Controller
         return view('patients.create', compact('states','cities'));
     }
 
-    public function store(){
-
+    /**
+     * Store patient information to database.
+     *
+     * @return Renderable
+     */
+    public function store(Request $request){
+        dd($request->all());
     }
 
     public function edit(){

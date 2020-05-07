@@ -37,7 +37,7 @@ class PatientDetails extends Model
     /**
      * @var array
      */
-    protected $fillable = ['userId', 'firstName', 'lastName', 'sex', 'race', 'dob', 'weight', 'height', 'matricNo', 'bloodGroup', 'phone', 'address_1', 'address_2', 'postcode', 'created_at', 'updated_at'];
+    protected $fillable = ['userId', 'sex', 'race', 'dob', 'weight', 'height', 'matricNo', 'bloodGroup', 'phone', 'address_1', 'address_2', 'postcode', 'created_at', 'updated_at'];
 
     /**
      * @return BelongsTo
