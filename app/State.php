@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $created_at
  * @property string $updated_at
  * @property City[] $cities
- * @property PatientDetail[] $patientDetails
  */
 class State extends Model
 {
@@ -32,13 +31,5 @@ class State extends Model
     public function cities()
     {
         return $this->hasMany('App\City', 'stateId');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function patientDetails()
-    {
-        return $this->hasMany('App\PatientDetail', 'stateId');
     }
 }

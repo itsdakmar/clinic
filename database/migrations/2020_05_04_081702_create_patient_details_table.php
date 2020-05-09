@@ -18,10 +18,9 @@ class CreatePatientDetailsTable extends Migration
             $table->unsignedBigInteger('userId');
             $table->string('sex');
             $table->string('race');
-            $table->date('dob');
+            $table->dateTime('dob');
             $table->smallInteger('weight')->nullable();
             $table->smallInteger('height')->nullable();
-            $table->string('matricNo');
             $table->string('bloodGroup');
             $table->string('phone');
             $table->string('address_1');

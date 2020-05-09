@@ -158,7 +158,10 @@
                             </div>
                             <a class="dropdown-item">Account settings</a>
                             <a class="dropdown-item">Billing history</a>
-                            <a class="dropdown-item" href="{{route('signIn')}}">Sign out</a>
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button type="submit" class="dropdown-item">Sign out</button>
+                            </form>
                         </div>
                     </div>
                 </div>

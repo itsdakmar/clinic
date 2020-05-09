@@ -126,10 +126,7 @@ Route::view('charts/apexMixCharts', 'charts.apexMixCharts')->name('apexMixCharts
 // datatables
 Route::view('datatables/basic-tables', 'datatables.basic-tables')->name('basic-tables');
 
-// sessions
-Route::view('sessions/signIn', 'sessions.signIn')->name('signIn');
-Route::view('sessions/signUp', 'sessions.signUp')->name('signUp');
-Route::view('sessions/forgot', 'sessions.forgot')->name('forgot');
+
 
 // widgets
 Route::view('widgets/card', 'widgets.card')->name('widget-card');
