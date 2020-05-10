@@ -34,7 +34,7 @@ $(document).ready(function () {
         $.ajax({
             url: url,
             type: 'POST',
-            data: {_token: CSRF_TOKEN, stateId: $("#input_state").val()},
+            data: {stateId: $("#input_state").val()},
             dataType: 'JSON',
             success: function (data) {
                 $('#input_city').find('option').remove().end().append($('<option>', {

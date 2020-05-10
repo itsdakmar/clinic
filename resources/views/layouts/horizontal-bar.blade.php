@@ -10,18 +10,24 @@
                                     Patient
                                 </label>
                                 <a href="#">
-                                    <i class="nav-icon mr-2 i-Bar-Chart"></i>
+                                    <i class="nav-icon mr-2 i-Love-User"></i>
                                     Patient
                                 </a>
 
                                 <input type="checkbox" id="drop-2">
                                 <ul>
-
                                     <li class="nav-item ">
                                         <a class="{{ Route::currentRouteName()=='patients.index' ? 'open' : '' }}"
                                            href="{{route('patients.index')}}">
-                                            <i class="nav-icon mr-2 i-Clock-3"></i>
+                                            <i class="nav-icon mr-2 i-Find-User"></i>
                                             <span class="item-name">List of patient</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="{{ Route::currentRouteName()=='patients.create' ? 'open' : '' }}"
+                                           href="{{route('patients.create')}}">
+                                            <i class="nav-icon mr-2 i-Add-User"></i>
+                                            <span class="item-name">Create patient</span>
                                         </a>
                                     </li>
                                 </ul>

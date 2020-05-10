@@ -72,6 +72,14 @@
 
         {{-- common js --}}
         <script src="{{  asset('assets/js/common-bundle-script.js')}}"></script>
+
+        <script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        </script>
         {{-- page specific javascript --}}
         @yield('page-js')
 

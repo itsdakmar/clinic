@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\City;
+use App\Mail\WelcomeMail;
 use App\State;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class PatientController extends Controller
 {
@@ -51,9 +54,9 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-
+        $password = Str::random(10);
         $user = User::create($request->merge([
-            'password' => Hash::make('secret'),
+            'password' => Hash::make($password),
             'matricStaffId' => ($request->StaffId !== NULL) ? $request->StaffId : $request->matricId
         ])->all());
 
@@ -62,6 +65,13 @@ class PatientController extends Controller
         ])->all());
 
         $user->assignRole('patient');
+
+        Mail::to($request->email)->send(new WelcomeMail([
+                'name' => $request->firstName.' '.$request->lastName,
+                'password' => $password
+            ]
+
+        ));
 
         return redirect()->route('patients.index')->withStatus(__('Patient information successfully created.'));
 

@@ -41,55 +41,12 @@
     <script src="{{asset('assets/js/vendor/datatables.min.js')}}"></script>
     <script src="{{asset('assets/js/datatables.script.js')}}"></script>
     <script src="{{asset('assets/js/vendor/sweetalert2.min.js')}}"></script>
+    <script src="{{asset('js/swal-confirm.js')}}"></script>
 
     <script type="application/javascript">
         $(document).ready(function () {
             $('#zero_configuration_table_filter, #zero_configuration_table_paginate').addClass('float-right');
             $("#zero_configuration_table_filter input").css("width", "250px");
-
-            $('.alert-confirm').on('click', function () {
-                let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-                let url = $(this).data('href');
-                let id = $(this).data('id');
-                swal({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#0CC27E',
-                    cancelButtonColor: '#FF586B',
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'No, cancel!',
-                    confirmButtonClass: 'btn btn-success mr-5',
-                    cancelButtonClass: 'btn btn-danger',
-                    buttonsStyling: false
-                }).then(function () {
-                    $.ajax({
-                        url: url,
-                        type: 'DELETE',
-                        data: {_token: CSRF_TOKEN, id: id},
-                        success: function () {
-                            swal(
-                                'Deleted!',
-                                'Successfully deleted.',
-                                'success'
-                            ).then(function() {
-                                location.reload();
-                            });
-                        }
-                    });
-
-                }, function (dismiss) {
-                    // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
-                    if (dismiss === 'cancel') {
-                        swal(
-                            'Cancelled',
-                            '',
-                            'error'
-                        )
-                    }
-                })
-            });
         });
     </script>
 @endsection
