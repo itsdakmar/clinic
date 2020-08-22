@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>Gull - Laravel 6 + Bootstrap 4 admin template</title>
+        <title>UTeM Clinic Management System</title>
         <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
         @yield('before-css')
         {{-- theme css --}}
@@ -24,11 +24,7 @@
 
         <!-- Pre Loader Strat  -->
         <div class='loadscreen' id="preloader">
-
-            <div class="loader spinner-bubble spinner-bubble-primary">
-
-
-            </div>
+            <div class="loader spinner-bubble spinner-bubble-primary"></div>
         </div>
         <!-- Pre Loader end  -->
 
@@ -38,8 +34,6 @@
             @include('layouts.header-menu')
 
             <!-- ============ end of header menu ============= -->
-
-
 
             @include('layouts.horizontal-bar')
 
@@ -61,12 +55,12 @@
         @include('layouts.search')
         <!-- ============ Search UI End ============= -->
 
-        {{-- @include('layouts.horizontal-customizer') --}}
+{{--         @include('layouts.horizontal-customizer')--}}
 
 
         <!-- ============ Horizontal Layout End ============= -->
 
-        @include('layouts.customizer')
+{{--        @include('layouts.customizer')--}}
 
 
 
@@ -92,6 +86,13 @@
         {{-- laravel js --}}
         {{-- <script src="{{mix('assets/js/laravel/app.js')}}"></script> --}}
 
+        <script>
+            $(".alert").fadeTo(3000, 500).slideUp(500, function(){
+                $(".alert").slideUp(500);
+            });
+
+            $('[data-toggle="tooltip"]').tooltip()
+        </script>
         @yield('bottom-js')
     </body>
 

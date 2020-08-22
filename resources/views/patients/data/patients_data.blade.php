@@ -14,7 +14,7 @@
 </thead>
 <tbody>
 @foreach($patients as $key => $patient)
-    <tr>
+    <tr data-href="{{ route('patients.show', $patient->id) }}">
         <td>{{ $patient->matricStaffId }}</td>
         <td>{{ $patient->fullName }}</td>
         <td>{{ $patient->patientDetail->sex }}</td>
@@ -25,12 +25,14 @@
         <td>{{ $patient->created_at->format('d / m / Y') }}</td>
         <td>{{ $patient->updated_at->format('d / m / Y') }}</td>
         <td>
+            @hasanyrole('nurse')
             <a href="{{ route('patients.edit', $patient) }}" class="text-success mr-2">
                 <i class="nav-icon i-Pen-2 font-weight-bold"></i>
             </a>
             <a href="#" class="text-danger mr-2 alert-confirm" data-href=" {{ route('patients.destroy', $patient) }}" data-id="{{ $patient->id }}" >
                 <i class="nav-icon i-Close-Window font-weight-bold"></i>
             </a>
+            @endhasanyrole
         </td>
     </tr>
 @endforeach

@@ -25,7 +25,7 @@
         <div class="col-lg-9 col-md-12 mb-3">
             <div class="card">
                 <div class="card-header bg-transparent">
-                    <h3 class="card-title"> Default Action Bar</h3>
+                    <h3 class="card-title">Patient's Information</h3>
                 </div>
                 <!--begin::form-->
                 <form action="{{ route('patients.update', $patient)}}" method="post" class="needs-validation" novalidate>
@@ -96,12 +96,12 @@
                                 <label for="inputEmail5" class="ul-form__label">Sex:</label>
                                 <div class="ul-form__radio-inline">
                                     <label class=" ul-radio__position radio radio-primary form-check-inline">
-                                        <input class="sex" name="sex" type="radio" value="M" @if($patient->patientDetail->sex == 'MALE') checked @endif>
+                                        <input class="sex" name="sex" type="radio" value="M" {{($patient->patientDetail->sex == 'MALE') ? 'checked' : '' }}>
                                         <span class="ul-form__radio-font">Male</span>
                                         <span class="checkmark"></span>
                                     </label>
                                     <label class="ul-radio__position radio radio-primary">
-                                        <input class="sex" name="sex" type="radio" value="F" @if($patient->patientDetail->sex == 'FEMALE') checked @endif>
+                                        <input class="sex" name="sex" type="radio" value="F" {{($patient->patientDetail->sex == 'FEMALE') ? 'checked' : '' }}>
                                         <span class="ul-form__radio-font">Female</span>
                                         <span class="checkmark"></span>
                                     </label>
@@ -146,7 +146,7 @@
                                 <label for="datePicker" class="ul-form__label">Birth date</label>
                                 <div class="input-group">
                                     <input type="text" name="dob" id="datePicker" class="form-control"
-                                           placeholder="Enter birth date" required value="{{ old('dob' , $patient->patientDetail->dob->format('d / m / Y')) }}">
+                                           placeholder="Enter birth date" required value="{{ old('dob' , $patient->patientDetail->dob->format('d/m/Y')) }}">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary text-white" type="button">
                                             <i class="icon-regular i-Calendar-4"></i>
@@ -180,14 +180,14 @@
                                 <label for="input_bloodType" class="ul-form__label">Select blood type</label>
                                 <select name="bloodGroup" class="form-control" id="input_bloodType" required>
                                     <option value="">Please select your blood type</option>
-                                    <option value="o+" @if($patient->bloodGroup == 'o+') selected @endif >O(+)</option>
-                                    <option value="o-" @if($patient->bloodGroup == 'o-') selected @endif >O(-)</option>
-                                    <option value="b+" @if($patient->bloodGroup == 'b+') selected @endif >B(+)</option>
-                                    <option value="b-" @if($patient->bloodGroup == 'b-') selected @endif >B(-)</option>
-                                    <option value="a+" @if($patient->bloodGroup == 'a+') selected @endif >A(+)</option>
-                                    <option value="a-" @if($patient->bloodGroup == 'a-') selected @endif >A(-)</option>
-                                    <option value="ab+" @if($patient->bloodGroup == 'ab+') selected @endif >AB(+)</option>
-                                    <option value="ab-" @if($patient->bloodGroup == 'ab-') selected @endif >AB(-)</option>
+                                    <option value="o+" @if($patient->patientDetail->bloodGroup == 'O+') selected @endif >O(+)</option>
+                                    <option value="o-" @if($patient->patientDetail->bloodGroup == 'O-') selected @endif >O(-)</option>
+                                    <option value="b+" @if($patient->patientDetail->bloodGroup == 'B+') selected @endif >B(+)</option>
+                                    <option value="b-" @if($patient->patientDetail->bloodGroup == 'B-') selected @endif >B(-)</option>
+                                    <option value="a+" @if($patient->patientDetail->bloodGroup == 'A+') selected @endif >A(+)</option>
+                                    <option value="a-" @if($patient->patientDetail->bloodGroup == 'A-') selected @endif >A(-)</option>
+                                    <option value="ab+" @if($patient->patientDetail->bloodGroup == 'AB+') selected @endif >AB(+)</option>
+                                    <option value="ab-" @if($patient->patientDetail->bloodGroup == 'AB-') selected @endif >AB(-)</option>
                                 </select>
                                 <small class="ul-form__text form-text ">
                                     Please select your blood type
@@ -198,7 +198,7 @@
                         <div class="form-row ">
                             <div class="form-group mb-4 col-md-6">
                                 <label for="input_contact" class="ul-form__label">Contact Number:</label>
-                                <input name="phone" type="text" class="form-control" id="input_contact"
+                                <input name="phone" type="number" class="form-control" id="input_contact"
                                        placeholder="Enter contact number" required value="{{ old('phone' , $patient->patientDetail->phone) }}">
                                 <small class="ul-form__text form-text ">
                                     Please enter your contact number
@@ -265,7 +265,7 @@
                             </div>
                             <div class="form-group mb-4 col-md-3">
                                 <label for="input_postcode" class="ul-form__label">Postcode:</label>
-                                <input name="postcode" type="text" class="form-control" id="input_postcode"
+                                <input name="postcode" type="number" class="form-control" id="input_postcode"
                                        placeholder="Enter postcode" required value="{{ old('postcode' , $patient->patientDetail->postcode) }}">
                                 <small class="ul-form__text form-text ">
                                     Please enter your postcode

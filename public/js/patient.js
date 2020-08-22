@@ -68,6 +68,7 @@ $(document).ready(function () {
                 $('.birth_error').show();
                 $('#datePicker').css({"border-color": "#f44336"});
             }
+
         }
         $(this).addClass('was-validated');
 

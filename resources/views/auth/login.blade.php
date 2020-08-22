@@ -5,14 +5,40 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Gull - Laravel + Bootstrap 4 admin template</title>
+        <title>UTeM Clinic Management System</title>
         <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
         <link rel="stylesheet" href="{{asset('assets/styles/css/themes/lite-purple.min.css')}}">
     </head>
 
     <body>
-        <div class="auth-layout-wrap" style="background: linear-gradient(87deg, #60c2c9 0, #6ac6c1 100%) !important;">
+        <div class="auth-layout-wrap" style="background:linear-gradient(45deg, #cadcfb, #60c2c9) !important;">
+
+
             <div class="auth-content">
+                @if (session('status'))
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-card alert-success text-center" role="alert">
+                            {{ session('status') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                @endif
+                    @if (session('verified'))
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-card alert-warning text-center" role="alert">
+                                    {{ session('verified') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 <div class="card o-hidden">
                     <div class="row">
                         <div class="col-md-6">
@@ -62,14 +88,12 @@
                                     <button class="btn btn-rounded btn-primary btn-block mt-2">Sign In</button>
 
                                 </form>
-                                @if (Route::has('password.request'))
+
 
                                 <div class="mt-3 text-center">
 
-                                    <a href="{{ route('password.request') }}" class="text-muted"><u>Forgot
-                                            Password?</u></a>
+                                    <a href="{{ route('register.patient') }}" class="text-muted"><u>Register now!</u></a>
                                 </div>
-                                @endif
                             </div>
                         </div>
                         <div class="col-md-6 text-center "

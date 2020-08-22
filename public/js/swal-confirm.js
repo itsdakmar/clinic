@@ -1,5 +1,7 @@
 $(document).ready(function () {
-    $('.alert-confirm').on('click', function () {
+    $('.alert-confirm').on('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
         let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         let url = $(this).data('href');
         let id = $(this).data('id');
@@ -20,15 +22,25 @@ $(document).ready(function () {
                 url: url,
                 type: 'DELETE',
                 data: {_token: CSRF_TOKEN, id: id},
-                success: function () {
-                    swal(
-                        'Deleted!',
-                        'Successfully deleted.',
-                        'success'
-                    ).then(function () {
-                        location.reload();
-                    });
-                }
+                success: function (message) {
+                    if(message == 'false'){
+                        swal(
+                            'Failed!',
+                            'User cannot be deleted. Constraint with appointment .',
+                            'error'
+                        ).then(function () {
+                            location.reload();
+                        });
+                    }else {
+                        swal(
+                            'Deleted!',
+                            'Successfully deleted.',
+                            'success'
+                        ).then(function () {
+                            location.reload();
+                        });
+                    }
+                },
             });
 
         }, function (dismiss) {

@@ -11,35 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard.dashboardv1');
-});
-// Route::view('/', 'starter')->name('starter');
-Route::get('large-compact-sidebar/dashboard/dashboard1', function () {
-    // set layout sesion(key)
-    session(['layout' => 'compact']);
-    return view('dashboard.dashboardv1');
-})->name('compact');
-
-Route::get('large-sidebar/dashboard/dashboard1', function () {
-    // set layout sesion(key)
-    session(['layout' => 'normal']);
-    return view('dashboard.dashboardv1');
-})->name('normal');
-
-Route::get('horizontal-bar/dashboard/dashboard1', function () {
-    // set layout sesion(key)
-    session(['layout' => 'horizontal']);
-    return view('dashboard.dashboardv1');
-})->name('horizontal');
-
-Route::get('vertical/dashboard/dashboard1', function () {
-    // set layout sesion(key)
-    session(['layout' => 'vertical']);
-    return view('dashboard.dashboardv1');
-})->name('vertical');
-
-
 Route::view('dashboard/dashboard1', 'dashboard.dashboardv1')->name('dashboard_version_1');
 Route::view('dashboard/dashboard2', 'dashboard.dashboardv2')->name('dashboard_version_2');
 Route::view('dashboard/dashboard3', 'dashboard.dashboardv3')->name('dashboard_version_3');
@@ -127,7 +98,6 @@ Route::view('charts/apexMixCharts', 'charts.apexMixCharts')->name('apexMixCharts
 Route::view('datatables/basic-tables', 'datatables.basic-tables')->name('basic-tables');
 
 
-
 // widgets
 Route::view('widgets/card', 'widgets.card')->name('widget-card');
 Route::view('widgets/statistics', 'widgets.statistics')->name('widget-statistics');
@@ -143,13 +113,55 @@ Route::view('others/faq', 'others.faq')->name('faq');
 Route::view('others/pricing-table', 'others.pricing-table')->name('pricing-table');
 Route::view('others/search-result', 'others.search-result')->name('search-result');
 
-Route::get('/', function () {
-    return view('auth.login');
-});
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware(['patient.detail'])->group(function(){
+
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/service/yearly', 'HomeController@byServiceYearly')->name('service.yearly');
+    Route::get('/most/drug', 'HomeController@mostUsedDrugs')->name('most.drug');
+    Route::get('/last/month', 'HomeController@lastMonthTotal')->name('last.month');
+    Route::get('/last/20days', 'HomeController@last20Days')->name('last.20days');
+
+
+    Route::get('/appointments/{appointmentId}/add/diagnosis', 'DiagnosisController@create')->name('diagnosis.create');
+    Route::post('/appointments/{appointmentId}/diagnosis/store', 'DiagnosisController@prescription')->name('diagnosis.store');
+    Route::post('/drug', 'DrugController@get')->name('drug.get');
+    Route::get('/appointments/today', 'AppointmentController@today')->name('appointments.today');
+    Route::post('/appointments/check', 'AppointmentController@check')->name('appointments.check');
+    Route::get('/appointments/upcoming', 'AppointmentController@listViewCustomer')->name('appointments.upcoming');
+    Route::get('/appointments/weekly', 'AppointmentController@listView')->name('appointments.weekly');
+    Route::get('/appointments/history', 'AppointmentController@listViewHistoryCustomer')->name('appointments.history');
+    Route::post('/appointments/{appointmentId}/confirmed', 'AppointmentController@confirmed')->name('appointments.confirmed');
+    Route::post('/appointments/{appointmentId}/canceled', 'AppointmentController@canceled')->name('appointments.canceled');
+    Route::post('/appointments/{appointmentId}/ongoing', 'AppointmentController@ongoing')->name('appointments.ongoing');
+    Route::post('/appointments/{appointmentId}/resolved', 'AppointmentController@resolved')->name('appointments.resolved');
+    Route::get('/json/appointment', 'AppointmentController@all');
+    Route::post('/find/patient', 'PatientController@findPatient')->name('find.patient');
+    Route::post('/find/doctor', 'DoctorController@findDoctor')->name('find.doctor');
+    Route::post('/find/drug', 'DrugController@findDrug')->name('find.drug');
+    Route::get('/reporting', 'ReportingController@index')->name('reporting');
+    Route::get('/profile', 'ProfileController@index')->name('profile');
+
+    Route::resource('doctors', 'DoctorController');
+    Route::resource('nurses', 'NurseController');
+    Route::resource('pharmacists', 'PharmacistController');
+    Route::resource('appointments', 'AppointmentController');
+    Route::resource('drugs', 'DrugController');
+    Route::resource('suppliers', 'SupplierController');
+});
 
 
 Route::post('cities/get', 'CityController@getCities')->name('cities.get');
-Route::resource('patients','PatientController');
+
+Route::get('/patients/{patientId}/verify', 'RegisterController@verify')->name('patients.verify');
+
+
+Route::get('register/patient', 'RegisterController@index')->name('register.patient');
+Route::post('register/patient', 'RegisterController@store')->name('register.patient');
+
+Route::resource('patients', 'PatientController');
+
+Route::get('patient/{patientId}/detail/update', 'PatientController@patientDetailUpdate')->name('update.patient');
+
